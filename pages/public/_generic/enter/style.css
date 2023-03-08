@@ -1,0 +1,21 @@
+.head {
+    position: absolute;
+    top:0;
+    left:0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: blue;
+}
+
+.home {
+    cursor: pointer;
+}
+
+.main {
+    padding-top: 50px;
+}
+
+.langImg {
+    width: 25px;
+    height: 25px;
+}
