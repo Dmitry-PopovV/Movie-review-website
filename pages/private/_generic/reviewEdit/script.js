@@ -1,7 +1,3 @@
-function goToHome() {
-    document.location = "/";
-}
-
 async function getReview() {
     let res = await fetch("/selRev", {
         method: "GET"
@@ -18,21 +14,6 @@ getReview()
         document.getElementById('revRating').value = val[2];
         reviewID = val[3];
     });
-
-function goToMy() {
-    document.location = '/' + String(document.location.pathname).split('/')[1] + "/my";
-}
-
-async function changeLang() {
-    let res = await fetch("/lang", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ path: document.location.pathname })
-    });
-    document.location = await res.text();
-}
 
 async function updateRev() {
     const bodyData = {
@@ -54,11 +35,5 @@ async function updateRev() {
         goToMy();
     }
 }
-
-document.getElementById("profile").addEventListener("click", goToMy);
-
-document.getElementById("lang").addEventListener("click", changeLang);
-
-document.getElementById("home").addEventListener("click", goToHome);
 
 document.getElementById("confirm").addEventListener("click", updateRev);

@@ -1,11 +1,10 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const session = require('express-session');
-const registrationRouter = require('./lib/routers/registrationRouter');
-const enterRouter = require('./lib/routers/enterRouter');
-const serverStart = require('./lib/services/serverStart');
-const staticRouter = require('./lib/routers/staticRouter');
-const rootRouter = require('./lib/routers/rootRouter');
-const errorRouter = require('./lib/routers/errorRouter');
+const serverStart = require('./lib/services/serverStart.js');
+const staticRouter = require('./lib/routers/staticRouter/staticRouter');
+const TIRouter = require('./lib/routers/TIRouter/TIRouter');
+const errorRouter = require('./lib/routers/errorRouter/errorRouter');
 const setStandartSession = require('./lib/midleware/setStandartSession');
 
 const app = express();
@@ -14,12 +13,12 @@ serverStart()
     .then((res) => {
         const addModelsToReq = res.msRes;
         app
+            .use(bodyParser.json())
+            .set('view engine', 'ejs')
             .use(session({ secret: res.cookieSecret, cookie: { maxAge: 36000000 }, resave: false, saveUninitialized: true}))
             .use('/', setStandartSession())
             .use('/', addModelsToReq())
-            .use('/', rootRouter)
-            .use('/', registrationRouter)
-            .use('/', enterRouter)
+            .use('/', TIRouter)
             .use('/', staticRouter)
             .use('/', errorRouter);
 

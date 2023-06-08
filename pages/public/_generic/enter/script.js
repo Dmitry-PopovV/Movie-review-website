@@ -1,7 +1,3 @@
-function goToHome() {
-    document.location = "/";
-}
-
 async function tryEnter() {
     const bodyData = {
         login: document.getElementById("login").value,
@@ -22,19 +18,4 @@ async function tryEnter() {
     }
 }
 
-async function changeLang() {
-    let res = await fetch("/lang", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({path: document.location.pathname})
-    });
-    document.location = await res.text();
-}
-
-document.getElementById("home").addEventListener("click", goToHome);
-
 document.getElementById("submit").addEventListener("click", tryEnter);
-
-document.getElementById("lang").addEventListener("click", changeLang);

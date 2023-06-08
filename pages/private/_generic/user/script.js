@@ -1,7 +1,3 @@
-function goToHome() {
-    document.location = "/";
-}
-
 async function getReviews() {
     let res = await fetch("/rev", {
         method: "GET"
@@ -33,23 +29,3 @@ getReviews()
         document.getElementById('reviews').innerHTML = str;
     });
 
-function goToMy() {
-    document.location = '/' + String(document.location.pathname).split('/')[1] + "/my";
-}
-
-async function changeLang() {
-    let res = await fetch("/lang", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ path: document.location.pathname })
-    });
-    document.location = await res.text();
-}
-
-document.getElementById("profile").addEventListener("click", goToMy);
-
-document.getElementById("lang").addEventListener("click", changeLang);
-
-document.getElementById("home").addEventListener("click", goToHome);
